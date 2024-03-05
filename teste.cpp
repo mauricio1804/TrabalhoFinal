@@ -115,21 +115,21 @@ void ordenaListajogos(Jogos *v, int n)
     }
 }
 
-void deleta_jogo(int x, Jogos *v, int n)
+int deleta_jogo(int x, Jogos *v, int n)
 {
-    int pos;
+    int pos = 0;
     for (int i = 0; i < n; i++)
     {
         if (v[i].id == x)
         {
-            n--;
             pos = i;
         }
     }
-    for (int i = pos; i < n; i++)
+    for (int i = pos + 1; i < n; ++i)
     {
-        v[i] = v[i + 1];
+        v[i - 1] = v[i];
     }
+    return 0;
 }
 
 int main()
@@ -201,7 +201,9 @@ int main()
             cout << "Informe o ID do jogo que deseja deletar: " << endl;
             cin >> id_delet;
             deleta_jogo(id_delet, jogonovo, N);
+
             N--;
+
             break;
 
         default:
