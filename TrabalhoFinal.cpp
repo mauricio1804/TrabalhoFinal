@@ -24,13 +24,15 @@ int addjoguin(Jogos *jogos)
     cout << "ID: ";
     cin >> jogos->id;
     cout << "Nome: ";
-    cin >> jogos->nome;
+    cin.ignore();
+    getline(cin, jogos->nome);
     cout << "Preco: ";
     cin >> jogos->preco;
     cout << "Data de lancamento (somente com espacos): ";
     cin >> jogos->lancamento.dia >> jogos->lancamento.mes >> jogos->lancamento.ano;
     cout << "Descricao: ";
-    cin >> jogos->descricao;
+    cin.ignore();
+    getline(cin, jogos->descricao);
 
     return 1;
 }
@@ -62,7 +64,7 @@ void imprimeJogo(Jogos *games)
     cout << "Jogo Novo" << endl;
     cout << "ID: " << games->id << endl;
     cout << "Nome: " << games->nome << endl;
-    cout << "Preco: R$" << games->preco << setprecision(2) << endl;
+    cout << fixed << setprecision(2)<< "Preco: R$" << games->preco << endl;
     cout << "Data de lancamento: " << games->lancamento.dia << "/" << games->lancamento.mes << "/" << games->lancamento.ano << endl;
     cout << "Descricao: " << games->descricao << endl;
 }
@@ -115,7 +117,7 @@ void ordenaListajogos(Jogos *v, int n)
     }
 }
 
-int deleta_jogo(int x, Jogos *v, int n)
+void deleta_jogo(int x, Jogos *v, int n)
 {
     int pos = 0;
     for (int i = 0; i < n; i++)
@@ -129,7 +131,6 @@ int deleta_jogo(int x, Jogos *v, int n)
     {
         v[i - 1] = v[i];
     }
-    return 0;
 }
 
 int main()
@@ -156,7 +157,7 @@ int main()
         cout << "digite 2 para listar jogos" << endl;
         cout << "digite 3 para buscar jogo pelo ID" << endl;
         cout << "digite 4 para remover jogo" << endl;
-        cout << "digite 0 para remover jogo" << endl;
+        cout << "digite 0 para terminar a execucao" << endl;
         cin >> escolha;
 
         switch (escolha)
@@ -201,7 +202,6 @@ int main()
             cout << "Informe o ID do jogo que deseja deletar: " << endl;
             cin >> id_delet;
             deleta_jogo(id_delet, jogonovo, N);
-
             N--;
 
             break;
